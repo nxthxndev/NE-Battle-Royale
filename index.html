@@ -104,14 +104,17 @@
         </footer>
     </div>
 
-    <!-- Scripts -->
-    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Scripts - ordre important ! -->
+    <!-- 1. Three.js (sans type="module") -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- 2. Firebase Compat (doit être avant config.js) -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <!-- 3. Config Firebase (doit être avant playerManager) -->
     <script src="Others/config.js"></script>
-    <script type="module" src="Java/lobby3d.js"></script>
-    <script type="module" src="Java/playerManager.js"></script>
-    <script type="module" src="Java/main.js"></script>
+    <!-- 4. Tes scripts (sans type="module") -->
+    <script src="Java/playerManager.js"></script>
+    <script src="Java/lobby3d.js"></script>
+    <script src="Java/main.js"></script>
 </body>
 </html>
-
