@@ -1,1 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NE Battle Royale - Lobby</title>
+    <link rel="stylesheet" href="Css/style.css">
+</head>
+<body>
+    <!-- Modal de choix de pseudo -->
+    <div id="usernameModal" class="modal">
+        <div class="modal-content">
+            <h1>NE Battle Royale</h1>
+            <p class="subtitle">Bienvenue dans l'arène</p>
+            <div class="input-container">
+                <input type="text" id="usernameInput" placeholder="Choisissez votre pseudo" maxlength="20">
+                <p class="input-hint">5-20 caractères, lettres et chiffres uniquement</p>
+                <p id="usernameError" class="error-message"></p>
+            </div>
+            <button id="confirmUsername" class="btn-primary">Rejoindre le lobby</button>
+        </div>
+    </div>
+
+    <!-- Interface principale du lobby -->
+    <div id="lobbyInterface" class="hidden">
+        <!-- Header -->
+        <header class="lobby-header">
+            <div class="logo-section">
+                <h1>NE Battle Royale</h1>
+                <span class="build-version">build 1.0</span>
+            </div>
+            <div class="user-info">
+                <div class="user-avatar">
+                    <div class="avatar-circle"></div>
+                </div>
+                <span id="currentUsername" class="username-display">Pseudo</span>
+            </div>
+        </header>
+
+        <!-- Conteneur principal -->
+        <div class="main-container">
+            <!-- Panneau gauche - Scène 3D -->
+            <div class="left-panel">
+                <div class="canvas-container">
+                    <canvas id="lobby3d"></canvas>
+                </div>
+                <div class="character-controls">
+                    <h3>Votre personnage</h3>
+                    <div class="skin-selector">
+                        <button class="skin-option active" data-skin="default">
+                            <div class="skin-preview skin-default"></div>
+                            <span>Défaut</span>
+                        </button>
+                        <button class="skin-option" data-skin="blue">
+                            <div class="skin-preview skin-blue"></div>
+                            <span>Bleu</span>
+                        </button>
+                        <button class="skin-option" data-skin="red">
+                            <div class="skin-preview skin-red"></div>
+                            <span>Rouge</span>
+                        </button>
+                        <button class="skin-option" data-skin="green">
+                            <div class="skin-preview skin-green"></div>
+                            <span>Vert</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panneau droit - Joueurs actifs -->
+            <div class="right-panel">
+                <div class="players-list-container">
+                    <div class="panel-header">
+                        <h2>Joueurs actifs</h2>
+                        <span id="playerCount" class="player-count">0</span>
+                    </div>
+                    <div id="playersList" class="players-list">
+                        <!-- Liste dynamique des joueurs -->
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn-play">
+                        <span class="btn-icon">▶</span>
+                        Jouer
+                    </button>
+                    <button id="changeUsername" class="btn-secondary">
+                        Changer de pseudo
+                    </button>
+                    <button class="btn-stats">
+                        <span class="btn-icon">📊</span>
+                        Statistiques
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="lobby-footer">
+            <div class="status-indicator">
+                <span class="status-dot"></span>
+                <span id="connectionStatus">Connecté</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="Others/config.js"></script>
+    <script type="module" src="Java/lobby3d.js"></script>
+    <script type="module" src="Java/playerManager.js"></script>
+    <script type="module" src="Java/main.js"></script>
+</body>
+</html>
 
