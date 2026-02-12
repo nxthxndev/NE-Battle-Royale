@@ -2,7 +2,7 @@
 const firebaseConfig = {
     apiKey: "AIzaSyB2Ox6EjEnq3jkpepBR1SBNqiY6m2Wh3LM",
     authDomain: "ne-battle-royale.firebaseapp.com",
-    databaseURL: "https://ne-battle-royale-default-rtdb.firebaseio.com",
+    databaseURL: "https://ne-battle-royale-default-rtdb.europe-west1.firebasedatabase.app/",
     projectId: "ne-battle-royale",
     storageBucket: "ne-battle-royale.firebasestorage.app",
     messagingSenderId: "612745279766",
