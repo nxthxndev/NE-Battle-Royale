@@ -76,11 +76,9 @@ class NEBattleRoyale {
         const { username, skin } = this.playerManager.getSavedSession();
         
         if (username) {
-            // Tenter de rejoindre avec le pseudo sauvegardé
             try {
                 await this.joinLobby(username, skin);
             } catch (error) {
-                // Si le pseudo est pris, forcer une nouvelle connexion
                 this.playerManager.clearSavedSession();
                 this.showUsernameModal();
             }
@@ -104,7 +102,6 @@ class NEBattleRoyale {
         }
 
         try {
-            // Désactiver le bouton pendant la vérification
             this.confirmUsernameBtn.disabled = true;
             this.confirmUsernameBtn.textContent = 'Vérification...';
             
@@ -118,25 +115,19 @@ class NEBattleRoyale {
     }
 
     async joinLobby(username, skin = 'default') {
-        // Rejoindre avec le PlayerManager
         const player = await this.playerManager.joinLobby(username, skin);
         
-        // Masquer le modal et afficher le lobby
         this.usernameModal.classList.add('hidden');
         this.lobbyInterface.classList.remove('hidden');
         
-        // Afficher le pseudo
         this.currentUsernameDisplay.textContent = player.username;
         
-        // Initialiser la scène 3D
         this.initLobby3D(skin);
         
-        // Commencer à écouter les changements de joueurs
         this.playerManager.onPlayersChange((players) => {
             this.updatePlayersList(players);
         });
         
-        // Réinitialiser le formulaire
         this.usernameInput.value = '';
         this.confirmUsernameBtn.disabled = false;
         this.confirmUsernameBtn.textContent = 'Rejoindre le lobby';
@@ -151,7 +142,6 @@ class NEBattleRoyale {
         this.lobby3D.changeSkin(skin);
         this.currentSkin = skin;
         
-        // Activer le bon bouton de skin
         document.querySelectorAll('.skin-option').forEach(btn => {
             btn.classList.remove('active');
             if (btn.dataset.skin === skin) {
@@ -187,7 +177,6 @@ class NEBattleRoyale {
         
         this.currentSkin = skinType;
         
-        // Mettre à jour visuellement
         document.querySelectorAll('.skin-option').forEach(btn => {
             btn.classList.remove('active');
             if (btn.dataset.skin === skinType) {
@@ -195,12 +184,10 @@ class NEBattleRoyale {
             }
         });
         
-        // Mettre à jour la scène 3D
         if (this.lobby3D) {
             this.lobby3D.changeSkin(skinType);
         }
         
-        // Sauvegarder dans Firebase
         await this.playerManager.changeSkin(skinType);
     }
 

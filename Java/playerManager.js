@@ -14,7 +14,6 @@ class PlayerManager {
     validateUsername(username) {
         const errors = [];
         
-        // Vérifier la longueur
         if (username.length < 5) {
             errors.push("Le pseudo doit contenir au moins 5 caractères");
         }
@@ -22,7 +21,6 @@ class PlayerManager {
             errors.push("Le pseudo ne peut pas dépasser 20 caractères");
         }
         
-        // Vérifier que c'est uniquement des lettres et chiffres
         const validPattern = /^[a-zA-Z0-9]+$/;
         if (!validPattern.test(username)) {
             errors.push("Le pseudo ne peut contenir que des lettres et des chiffres");
@@ -39,7 +37,6 @@ class PlayerManager {
         const snapshot = await this.playersRef.once('value');
         const players = snapshot.val() || {};
         
-        // Vérifier si un joueur actif a déjà ce pseudo (case insensitive)
         return Object.values(players).some(
             player => player.username.toLowerCase() === username.toLowerCase()
         );
@@ -58,7 +55,6 @@ class PlayerManager {
             throw new Error("Ce pseudo est déjà utilisé");
         }
 
-        // Créer le joueur
         const playerRef = this.playersRef.push();
         const playerId = playerRef.key;
         
@@ -70,16 +66,10 @@ class PlayerManager {
             lastActive: Date.now()
         };
 
-        // Ajouter à la base de données
         await playerRef.set(this.currentPlayer);
-
-        // Configurer la présence (déconnexion automatique)
         playerRef.onDisconnect().remove();
-
-        // Mettre à jour régulièrement l'activité
         this.startHeartbeat(playerRef);
 
-        // Stocker localement
         localStorage.setItem('nebr_username', username);
         localStorage.setItem('nebr_playerId', playerId);
         localStorage.setItem('nebr_skin', skin);
@@ -95,7 +85,7 @@ class PlayerManager {
                     lastActive: Date.now()
                 });
             }
-        }, 30000); // Toutes les 30 secondes
+        }, 30000);
     }
 
     // Changer le skin
@@ -125,7 +115,6 @@ class PlayerManager {
             const players = snapshot.val() || {};
             this.players = players;
             
-            // Convertir en array et trier par date de connexion
             const playersList = Object.entries(players).map(([id, data]) => ({
                 id,
                 ...data
@@ -170,7 +159,6 @@ class PlayerManager {
             throw new Error("Ce pseudo est déjà utilisé");
         }
 
-        // Mettre à jour
         this.currentPlayer.username = newUsername;
         await this.playersRef.child(this.currentPlayer.id).update({
             username: newUsername

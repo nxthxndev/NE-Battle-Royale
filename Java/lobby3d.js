@@ -150,7 +150,7 @@ class Lobby3D {
     createCharacter() {
         this.character = new THREE.Group();
 
-        // Corps principal (capsule approximée)
+        // Corps principal
         const bodyGeometry = new THREE.CylinderGeometry(0.35, 0.35, 1.2, 16);
         const bodyMaterial = new THREE.MeshStandardMaterial({
             color: 0x8e44ad,
